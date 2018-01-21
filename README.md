@@ -5,4 +5,4 @@ Learn C and build your own programming language in 1000 lines of code!
 
 Use the following basic command for compiling a single file:
 
-cc -std=c99 -Wall <filename>.c -o <filename>.out
+cc -std=c99 -g -O0 -Wall <filename>.c -o <filename>.out
