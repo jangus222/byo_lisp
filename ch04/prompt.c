@@ -1,8 +1,13 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
+
+#include <editline/readline.h>
+// #include <editline/history.h>
+
 /* Declare a buffer for user input */
 const int BUF_SIZE = 2048;
-static char input[BUF_SIZE];
+// static char input[BUF_SIZE];
 const char* QUIT = "quit";
 
 int main(int argc, char** argv) {
@@ -15,11 +20,18 @@ int main(int argc, char** argv) {
 	while(1) {
 	
 		/* Output prompt */
-		fputs("blit> ", stdout);
+// 		fputs("blit> ", stdout);
 		
 		/* Read a line of user input */
-		fgets(input, BUF_SIZE, stdin);
+// 		fgets(input, BUF_SIZE, stdin);
+		/* Output our prompt and get input from user */
+		char* input = readline("blit> ");
+
+		/* Add input to history */
+		add_history(input);
 		
+		/* Free retrieved input */
+		free(input);
 		/* End loop */
 		if (strncmp(input, QUIT, 4) == 0) {
 			printf("Bye for now.\n");
