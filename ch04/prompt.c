@@ -20,10 +20,7 @@ int main(int argc, char** argv) {
 	while(1) {
 	
 		/* Output prompt */
-// 		fputs("blit> ", stdout);
 		
-		/* Read a line of user input */
-// 		fgets(input, BUF_SIZE, stdin);
 		/* Output our prompt and get input from user */
 		char* input = readline("blit> ");
 
@@ -32,6 +29,7 @@ int main(int argc, char** argv) {
 		
 		/* Free retrieved input */
 		free(input);
+
 		/* End loop */
 		if (strncmp(input, QUIT, 4) == 0) {
 			printf("Bye for now.\n");
