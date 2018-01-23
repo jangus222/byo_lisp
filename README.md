@@ -11,3 +11,7 @@ And to compile with the readline library, link in edit:
 
 `cc -std=c99 -g -O0 -Wall prompt.c -ledit -o prompt.out`
 
+Add mpc library:
+
+`cc -std=c99 -g -O0 -Wall parsing.c mpc.c -ledit -lm -o parsing.out`
+
