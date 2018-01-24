@@ -66,7 +66,7 @@ int main(int argc, char** argv) {
 		char* input = readline("blit> ");
 		add_history(input);
 		
-    /* End loop */
+    /* Exit the REPL loop */
 		if (strncmp(input, QUIT, 4) == 0) {
 			printf("Bye for now.\n");
 			break;
