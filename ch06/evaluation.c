@@ -7,6 +7,31 @@
 /* Exit command for user to quit REPL */
 const char* QUIT = "quit";
 
+/* Count number of nodes in parse tree */
+int number_of_nodes(mpc_ast_t* t) {
+  printf("number_of_nodes()\n");
+  printf("t->children_num: %d\n", t->children_num);
+  printf("t->tag: %s\n", t->tag);
+
+  if (t->children_num == 0) { 
+    printf("children_num == 0\n");
+    return 1; 
+  }
+
+  if (t->children_num >= 1) {
+    printf("children_num >= 1, num: %d\n", t->children_num);
+    int total = 0;
+    for (int i = 0; i < t->children_num; i++) {
+      printf("looping and counting nodes, i: %d\n", i);
+      total = total + number_of_nodes(t->children[i]);
+      printf("total: %d\n", total);
+    }
+    printf("Returning total: %d\n", total);
+    return total;
+  }
+  return 0;
+}
+
 /* Use operator string to see which operation to perform */
 long eval_op(long x, char* op, long y) {
   if (strcmp(op, "+") == 0) { return x + y; }
@@ -57,7 +82,7 @@ int main(int argc, char** argv) {
       Number, Operator, Expr, Blit);
 
 	/* Print version and exit information */
-	puts("blit version 0.0.0.0.2");
+	puts("blit version 0.0.0.0.3");
 	puts("Ctrl+c or 'quit' to exit\n");
 
 	/* Continuous loop */
@@ -76,6 +101,9 @@ int main(int argc, char** argv) {
     mpc_result_t r;
     if (mpc_parse("<stdin>", input, Blit, &r)) {
 
+      int total_nodes = number_of_nodes(r.output);
+      printf("total nodes: %d", total_nodes);
+      
       long result = eval(r.output);
       printf("%li\n", result);
       mpc_ast_delete(r.output);
